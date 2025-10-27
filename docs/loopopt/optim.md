@@ -48,7 +48,7 @@ In the above example, suppose `n=1024` and we unroll by a factor of 4.  We say `
 
 In Vitis HLS, you do not need to manually unroll the loop.  You can simply add the pragma: 
 ~~~C
-#pragma HLS UNROLL factor=2
+#pragma HLS UNROLL factor=4
 ~~~
 
 ## Array partitioning

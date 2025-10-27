@@ -68,4 +68,4 @@ With the above clock rate and trip count of `n=1024`, the total latency was `103
 These metrics help us understand how efficiently the loop maps to hardware — whether operations are serialized or overlapped, and how well the design meets timing constraints.
 ---
 
-Go to [Optimizing the loop](./synthopt.md).
+Go to [Optimizing the loop](./optim.md).

@@ -14,7 +14,7 @@ In this note, we describe how we organize Vitis projects and show how to build t
 
 ## Directory structure
 
-Most Vitis projects in the repository follow the directory structure that we use for the vector multiplier.  The overall directory is `/fpgademos/vector_mult` and the Vitis files are in a sub-folder, `vmult_vitis`.  The Vitis folder has an internal structure:
+Most Vitis projects in the repository follow the directory structure that we use for the vector multiplier.  For the vector multiplier project, the overall directory is `/fpgademos/vector_mult` and the Vitis files are in a sub-folder, `vmult_vitis`.  The Vitis folder has an internal structure:
 ~~~
    vmult_vitis
    ├── include
@@ -36,7 +36,7 @@ To synthesize the Vitis IP,  we need to to find the precise target part number o
 
 ## Building the project manually
 Once you have written the design files for the Vitis IP, you can create the project either manually or via a script.  
-For the manual method using the example `vmult_vitis` as before:
+For the manual method, the steps for the example `vmult_vitis` are as follows.  You can modify them for any other project.
 
 * Launch Vitis HLS (see the [installation instructions]({{ site.baseurl }}/docs/installation.md#launching-vitis))
 * Go to `File → New Component → HLS`.  You will set a sequence of items:
@@ -49,7 +49,7 @@ For the manual method using the example `vmult_vitis` as before:
        * Testbench: Add `testbench/tb_vmult.cpp`
    * For `Hardware` part select `xczu48dr-ffvg1517-2-e` as above
    * For `Settings` keep as default, including clock period of `10ns`
-* Vitis will reopen withthe project.
+* Vitis will reopen with the project.
 
 If you do not have the source files like `vmult.cpp` of `vmult.h`, you can still create the project, and build them after the project is created.  In fact, the Vitis Unified IDE has an excellent editor.  
 

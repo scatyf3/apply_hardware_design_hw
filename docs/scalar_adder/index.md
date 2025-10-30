@@ -23,15 +23,9 @@ Prior to doing this demo, you will need to select an Ubuntu machine as the host 
 
 Then select a directory on the host computer and clone the repository to that directory. 
 
-## Building the Vitis IP and Vivado Project
+---
 
-The demo is conducted in two steps:
-
-* [Design the Vitis IP and FPGA project](./docs/fpga_build.md) where we design the IP in Vitis, integrate into the FPGA and create the Overlay
-* Run the [jupyter notebook demo]() that illustrates how to access the Overlay from python.
-
-You can directly skip the first step since we have uploaded the files for the Overlay in the git repo.
-
+Go to [Creating the Vivado Project](./vivado_build.md)
 
 
  

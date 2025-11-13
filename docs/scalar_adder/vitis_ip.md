@@ -12,18 +12,18 @@ and export the IP so that we can use it in Vivado.
 ## Getting the FPGA Part Number
 
 Before starting the Vitis IP, you will need to follow 
-the [instructions for building a Vivado project]({{ site.baseurl }}/sw_installation/installation.md) with a processor system.
+the [instructions for building a Vivado project](../sw_installation/vivado_build.md) with a processor system.
 Then, get the FPGA part number for that processing system.
 
 ## Creating the Vitis HLS Project
 
-* Launch Vitis (see the [installation instructions]({{ site.baseurl }}/sw_installation/installation.md))
+* Launch Vitis (see the [installation instructions](../sw_installation/installation.md))
 * Select **Open Workspace**.  Go to the directory `fpgademos\scalar_adder`.  This is where we will put the workspace.  `Vitis_HLS` will reopen.
 * Select **Create component->Create empty HLS component**.  You will walk through the following six steps:
     * For **Name and location**, select component name as `scalar_add` and the location as `fpgademos\scalar_adder\scalar_add_vitis`
     * Set the **Configuration file** select **Empty File** which is the default
     * In **Source Files**, select top function to `add`
-    * In the **Hardware** tab, you will need to select the hardware you are targetting.  Select **Part** and search for the FGPA part used in [building the Vivado project](./vivado_build.md).
+    * In the **Hardware** tab, you will need to select the hardware you are targetting.  Select **Part** and search for the FGPA part number from above.
     * In the **Settings** tab, I kept all defaults, except I set the clock speed to either `250MHz` or `300MHz`.
 * Now you should have an empty project.
 * Sometimes the part number was not correct.  To verify the selection of the part, on the **Flow** panel (left sidebar), go to the `C Synthesis` section and select the settings (gear box).

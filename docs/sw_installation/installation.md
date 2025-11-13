@@ -1,6 +1,6 @@
 ---
 title: Installing Vitis and Vivado
-parent: Software Installation
+parent: Software Set-Up
 nav_order: 1
 has_children: false
 ---

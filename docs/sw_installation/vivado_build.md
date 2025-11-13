@@ -1,6 +1,6 @@
 ---
 title: Building a Vivado Project
-parent: Software Installation
+parent: Software Set-Up
 nav_order: 2
 has_children: false
 --- 

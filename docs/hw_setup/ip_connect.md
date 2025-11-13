@@ -1,7 +1,7 @@
 ---
 title: Getting IP connectivity
-parent: Installation and Set-Up
-nav_order: 5
+parent: Hardware Set-Up
+nav_order: 3
 has_children: false
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Setting up the Pynq-Z2 board
-parent: Installation and Set-Up
-nav_order: 4
+parent:  Hardware Set-Up
+nav_order: 1
 has_children: false
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Building a Vitis HLS project
-parent: Installation and Set-Up
+parent: Software Installation
 nav_order: 3
 has_children: false
 ---

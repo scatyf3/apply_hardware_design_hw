@@ -1,7 +1,8 @@
 # Get the current directory
 $projectDir = Get-Location
+$base = Split-Path $projectDir -Leaf
 
-# Create overlay directory
+# Create overlay directory inside the current project folder
 $overlayDir = Join-Path $projectDir "overlay"
 New-Item -ItemType Directory -Force -Path $overlayDir | Out-Null
 
@@ -36,13 +37,10 @@ if (-not $tclfile) {
     exit 1
 }
 
-# Derive base name from project folder
-$base = Split-Path $projectDir -Leaf
-
-# Copy and rename
-Copy-Item $bitfile.FullName -Destination "$overlayDir\$base.bit"
-Copy-Item $hwhfile.FullName -Destination "$overlayDir\$base.hwh"
-Copy-Item $tclfile.FullName -Destination "$overlayDir\$base.tcl"
+# Copy and rename overlay files using current folder name
+Copy-Item $bitfile.FullName -Destination (Join-Path $overlayDir "$base.bit")
+Copy-Item $hwhfile.FullName -Destination (Join-Path $overlayDir "$base.hwh")
+Copy-Item $tclfile.FullName -Destination (Join-Path $overlayDir "$base.tcl")
 
 # Print file info
 Write-Host "Source file info:"

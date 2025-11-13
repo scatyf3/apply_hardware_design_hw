@@ -3,10 +3,14 @@
 # Get the directory from which the script was called
 project_dir="$(pwd)"
 
-# Create overlay directory inside the project folder
-mkdir -p "$project_dir/overlay"
+# Derive base name for overlay prefix
+base=$(basename "$project_dir")
 
-# Find .bit and .hwh files in the project folder
+# Create overlay directory inside the current project folder
+overlay_dir="$project_dir/overlay"
+mkdir -p "$overlay_dir"
+
+# Find .bit file in the project folder
 bitfile=$(find "$project_dir" -name "*.bit" | grep "impl_1" | sort | tail -n 1)
 
 # Handle missing .bit file
@@ -15,8 +19,7 @@ if [ -z "$bitfile" ]; then
   exit 1
 fi
 
-# Find corresponding .hwh file.  If the .bit file is named <name>_wrapper.bit, 
-# look for <name>.hwh
+# Find corresponding .hwh file
 bitbase=$(basename "$bitfile" .bit | sed 's/_wrapper$//')
 hwhfile=$(find "$project_dir" -name "${bitbase}.hwh" | head -n 1)
 
@@ -36,13 +39,10 @@ if [ -z "$tclfile" ]; then
   exit 1
 fi
 
-# Derive base name
-base=$(basename "$project_dir")
-
-# Copy and rename
-cp "$bitfile" "$project_dir/overlay/${base}.bit"
-cp "$hwhfile" "$project_dir/overlay/${base}.hwh"
-cp "$tclfile" "$project_dir/overlay/${base}.tcl"
+# Copy and rename overlay files
+cp "$bitfile" "$overlay_dir/${base}.bit"
+cp "$hwhfile" "$overlay_dir/${base}.hwh"
+cp "$tclfile" "$overlay_dir/${base}.tcl"
 
 # Print file info
 echo "Source file info:"
@@ -51,7 +51,7 @@ for f in "$bitfile" "$hwhfile" "$tclfile"; do
     stat --format="    Last modified: %y" "$f"
 done
 
-echo "Overlay files copied to: $project_dir/overlay/"
+echo "Overlay files copied to: $overlay_dir/"
 echo "  ${base}.bit"
 echo "  ${base}.hwh"
 echo "  ${base}.tcl"

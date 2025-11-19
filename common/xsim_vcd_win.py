@@ -54,7 +54,7 @@ def copy_vcd(sim_dir, base_dir, component_path):
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python run_xsim_vcd.py scalar_add/add")
+        print("Usage: python run_xsim_vcd.py scalar_fun/add")
         sys.exit(1)
 
     component_path = sys.argv[1]

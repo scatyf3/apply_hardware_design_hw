@@ -1,6 +1,6 @@
 ---
 title: Building the FPGA bitstream and PYNQ Overlay
-parent: Getting started
+parent: Scalar Function
 nav_order: 4
 has_children: false
 ---
@@ -49,11 +49,11 @@ Or, if you are using Windows powershell:
    Get-ChildItem -Recurse -Filter *.hwh
 ~~~
 You will locate files with names like:
-    *  `scalar_adder_wrapper.bit` — the FPGA configuration file
-    * `scalar_adder.hwh` — the hardware handoff file with IP metadata
+    *  `scalar_fun_wrapper.bit` — the FPGA configuration file
+    * `scalar_fun.hwh` — the hardware handoff file with IP metadata
 They are generally in two different directories.  
-*  In the same directory as the `.bit` file, find the TCL file, like `scalar_adder_wrapper.tcl`. This file is useful for scripting.  For some reason, there may be multiple `tcl` files in the Vivado project directory.  Take the one in the same directory as the `.bit` file.
-* Copy all the files to the `overlay` directory and rename them as:  `scalar_adder.bit`, `scalar_adder.hwh`, `scalar_adder.tcl`.
+*  In the same directory as the `.bit` file, find the TCL file, like `scalar_fun_wrapper.tcl`. This file is useful for scripting.  For some reason, there may be multiple `tcl` files in the Vivado project directory.  Take the one in the same directory as the `.bit` file.
+* Copy all the files to the `overlay` directory and rename them as:  `scalar_fun.bit`, `scalar_fun.hwh`, `scalar_fun.tcl`.
 
 ## Creating the PYNQ files via a script
 Since this file collection is a pain, I created a script to this(actually, I got ChatGPT to write the script :) ) to perform this file collection.

@@ -9,7 +9,7 @@ has_children: false
 We are now ready to access the Vitis IP from a jupyter notebook.
 
 
-First connect to the RFSoC similar to the [scalar adder demo](/docs/scalar_adder/pynq.md)
+First connect to the RFSoC similar to the [scalar adder demo](/docs/scalar_fun/pynq.md)
 and open a jupyter lab in the browser window of the host PC.
 
 

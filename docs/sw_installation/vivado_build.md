@@ -21,15 +21,15 @@ in later demos.  To build a Vivado with an MPSOC:
 
 * Launch Vivado (see the [installation instructions](hwdesign/docs/installation.md#launching-vivado)):
 * Select the menu option `File->Project->New...`.  
-   * For the project name, use `scalar_adder_vivado`.  
-   * In location, use the directory `hwdesign/scalar_adder`.  The Vivado project will then be stored in `scalar_adder/scalar_adder_vivado`.
+   * For the project name, use `scalar_fun_vivado`.  
+   * In location, use the directory `hwdesign/scalar_fun`.  The Vivado project will then be stored in `scalar_fun/scalar_fun_vivado`.
 * Select `RTL project`.  
    * Leave `Do not specify sources at this time` checked.
 * For `Default part`, select the `Boards` tab and then select:
    * For the RFSoC 4x2, select `Zynq UltraScale+ RFSoC 4x2 Development Board`.
    * For the PYNQ-Z2 board, select `pynq-z2` or something similar
 * The Vivado window should now open with a blank project.
-* You will see a number of files including the project directory, `scalar_adder\scalar_add_vivado`.
+* You will see a number of files including the project directory, `scalar_fun\scalar_fun_vivado`.
 
 ## Getting the FPGA part number
 To synthesize IP, you will need to find the  precise target part number of the FPGA that the IP will run on.  This target part number will be used for Vitis:

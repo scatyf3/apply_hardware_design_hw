@@ -14,7 +14,7 @@ We next create a Vivado project and add the IP to that project.
 
 Before we can add the IP, we have to **package** the IP in a way that it can be used in the Vivado project.
 
-* [Luanch Vitis](../../setup/sw_installation/installation.md) and open the workspace for the `scalar_fun` project
+* [Luanch the Vitis GUI](../../support/amd/lauching.md) and open the workspace for the `scalar_fun` project
 * In the **FLOW** panel (left sidebar), select select **Package → Run**.  
   This wraps the synthesized RTL into a reusable IP block, complete with metadata and interface definitions.
 * The packaging will have created a directory of files containing the *IP* for the adder.  It will be located in 
@@ -26,7 +26,7 @@ Before we can add the IP, we have to **package** the IP in a way that it can be 
 
 ## Create a Vivado Project and Add the IP
 
-* Follow the instructions to [build an Vivado project](../../setup/sw_installation/vivado_build.md) with a processing system.
+* Follow the instructions to [build an Vivado project](../../support/amd/vivado_build.md) with a processing system.
 * Go to **Tools->Settings->Project Settings->IP->Repository**.  Select the `+` sign in **IP Repositories**.  Navigate to the directory with the adder component.  In our case, this was at:  `hwdesign/scalar_fun/scalar_fun_vitis/add/hls/impl/ip`.  
 * Select the `Add IP` button (`+`) again.  Add this IP.  Now the `Add` block should show up as an option.  If it doesn't it is possible that you synthesized for the wrong FPGA part number.  
 * You should see an Vitis IP block with ports `s_axi_control`, `interrupt` and some clocks.  Select the **run block automation**.  This will connect the IP to the processing system and may add some additional blocks for resetting the processor and interfacing the IP with the processor.  

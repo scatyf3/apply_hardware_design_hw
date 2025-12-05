@@ -10,13 +10,13 @@ has_children: false
 ## Creating the project with the MPSOC
 We first create an Vivado project with the MPSOC:
 
-* Launch Vivado (see the [installation instructions]({{ site.baseurl }}/docs/common/installation.md#launching-vivado)):
-* Select the menu option `File->Project->New...`.  
+* [Launch Vivado](../../support/amd/lauching.md)
+* Select the menu option **File->Project->New...**.  
    * For the project name, use `vmult_vivado`.  
    * In location, use the directory `hwdesign/vec_mult`.  The Vivado project will then be stored in `hwdesign/vec_mult/vmult_vivado`.
-* Select `RTL project`.  
-   * Leave `Do not specify sources at this time` checked.
-* For `Default part`, select the `Boards` tab and then select `Zynq UltraScale+ RFSoC 4x2 Development Board`.
+* Select **RTL project**.  
+   * Leave *Do not specify sources at this time* checked.
+* For **Default part**, select the `Boards` tab and then select `Zynq UltraScale+ RFSoC 4x2 Development Board`.
 * The Vivado window should now open with a blank project.
 
 ## Add and configure the Zynq Processor

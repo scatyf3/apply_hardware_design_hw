@@ -43,6 +43,15 @@ build/
 **/dfx_runtime.txt
 *summary*
 *.rpt
+.autopilot/
+*.aps
+*.directive
+syn/
+impl/
+.debug/
+*.app
+
+
 
 
 # General

@@ -40,6 +40,7 @@ To this end, I created a script to this (actually, I got ChatGPT to write the sc
 
 * Go to the project folder.  So, for the scalar adder project this is `/hwdesign/scaler_fun`
 * Activate the virtual environment for the `xilinxutils` package, if has not been activated.
+* Navigate to the Vivado project directory for the board.  For example `/hwdesign/scalar_fun/scalar_fun_pynqz2/`
 * In the project directory simply run:
 ~~~bash
    collect_overlay

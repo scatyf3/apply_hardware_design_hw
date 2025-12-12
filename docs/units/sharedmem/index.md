@@ -1,7 +1,7 @@
 ---
 title: Shared Memory PS Interface
 parent: Course Units
-nav_order: 5
+nav_order: 6
 has_children: true
 ---
 

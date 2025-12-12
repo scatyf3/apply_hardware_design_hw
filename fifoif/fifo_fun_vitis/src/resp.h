@@ -10,10 +10,15 @@
 class Resp {
 public:
 
-    ap_int<16> trans_id;
-    ap_int<32> c;
-    ap_int<32> d;
-    ap_int<8> err_code;
+    enum ErrCode : unsigned int {
+        NO_ERR = 0,
+        SYNC_ERR = 1
+    };
+
+    ap_int<16> trans_id; // Transaction ID
+    ap_int<32> c; // Operand C
+    ap_int<32> d; // Operand D
+    ap_uint<8> err_code; // Error Code
 
     template<typename Tstream>
     bool stream_read_32(hls::stream<Tstream>& in) {

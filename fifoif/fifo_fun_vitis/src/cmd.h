@@ -10,9 +10,9 @@
 class Cmd {
 public:
 
-    ap_int<16> trans_id;
-    ap_int<32> a;
-    ap_int<32> b;
+    ap_int<16> trans_id; // Transaction ID
+    ap_int<32> a; // Operand A
+    ap_int<32> b; // Operand B
 
     template<typename Tstream>
     bool stream_read_32(hls::stream<Tstream>& in) {

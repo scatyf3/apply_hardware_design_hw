@@ -6,7 +6,7 @@ has_children: true
 
 # Introduction to Hardware Design
 
-This repository is for a potential class on introduction to hardware design tailored for students with no prior hardware experience.  Through practical labs, students will learn to:
+This repository is for a [NYU class](./nyu/) on introduction to hardware design tailored for students with no prior hardware experience.  Through practical labs, students will learn to:
 
 * Identify computationally demanding tasks suitable for hardware acceleration.
 * Design efficient hardware and software accelerators using state-of-the-art Vitis HLS 
@@ -14,7 +14,7 @@ This repository is for a potential class on introduction to hardware design tail
 * Integrate accelerators in processor-based systems
 * Deploy projects onto FPGA boards with PYNQ-based python interfaces
 
-If you are an NYU Tandon student, this class may be offered initially in Spring 2026.
+While the course website is designed for NYU students, the material is open to all.
 
 
 <img src="./images/pynq-z2.png" alt="Pynq-Z2 board" width="400"/>
@@ -40,16 +40,29 @@ instructions on deploying the hardware on one of two  FPGA platforms:
 
 ## People
 
-The material is developed by [Sundeep Rangan](https://wireless.engineering.nyu.edu/sundeep-rangan/), a Professor of ECE at New York University and Director of [NYU Wireless](https://wireless.engineering.nyu.edu/).  
+The material is developed by:
+
+*  [Sundeep Rangan](https://wireless.engineering.nyu.edu/sundeep-rangan/), an expert in wireless communications and Director of [NYU Wireless](https://wireless.engineering.nyu.edu/),
+* [Siddharth Garg][Siddharth Garg](https://engineering.nyu.edu/faculty/siddharth-garg),
+an expert in machine learning, cyber-security, hardware design, and, most recently,
+AI for chip design.  He is the PI on the NSF grant 
+[*NRT: Chips for All: Empowering Researchers from Diverse Disciplines to Design Hardware*](https://www.nsf.gov/awardsearch/show-award?AWD_ID=2345953) that supports this project.
+
+Both Sundeep and Siddharth are Professors in the NYU ECE department.
 
 
 ## Work in Progress
 
-The site is still under construction and I have just added a few items.  Long-term I am hoping to add a lot more demos as well
+The site is still under construction and we have just added a few items.  Long-term I am hoping to add a lot more demos as well
 as class material like lecture notes and problems.
 
 ## Feedback
 
-I would love to get your feedback -- positive or negative.  Feel free to email me, or better yet, send me a Pull Request.
+We would love to get your feedback -- positive or negative.  Feel free to email me, or better yet, send me a Pull Request.
+
+## Support
+The development of this course is supported in part by the NSF award,
+[*NRT: Chips for All: Empowering Researchers from Diverse Disciplines to Design Hardware*](https://www.nsf.gov/awardsearch/show-award?AWD_ID=2345953), a project
+led by PI Siddharth Garg.
 .
 

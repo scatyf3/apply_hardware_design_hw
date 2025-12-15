@@ -16,12 +16,13 @@ For all units, I will add lecture notes and problems.
 * [Unit 3:  Command-response FIFO interfaces and AXI4-Streaming](./fifoif/)
 * [Unit 4:  Loop optimization](./loopopt/)
 * Unit 5:  Load-Compute-Store Pattern
-* Unit 6:  Shared memory and the AXI4-Memory Map protocol
-* Unit 7:  Building multi-threaded control
-* Unit 8:  FIR Filters
-* Unit 9:  Systolic Arrays
-* Unit 10:  Convolutional networks
-* Unit 11:  Dataflow and message-passing architectures
-* Unit 12:  Interfacing with high-speed sample data  
+* Unit 6:  Data types and precision
+* Unit 7:  Shared memory and the AXI4-Memory Map protocol
+* Unit 8:  Building multi-threaded control
+* Unit 9:  FIR Filters
+* Unit 10:  Systolic Arrays
+* Unit 11:  Convolutional networks
+* Unit 12:  Dataflow and message-passing architectures
+* Unit 13:  Interfacing with high-speed sample data  
 
 

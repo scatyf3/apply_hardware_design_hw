@@ -53,5 +53,10 @@ It is also where the VCD file is opened and closed.
 Once the simulation is complete, it will create a **Value-Change Dump** or VCD file
 with the trace of all the inputs.  You can then visualize that in [jupyter notebook](https://github.com/sdrangan/hwdesign/blob/main/demos/basic_logic/timing_diag.ipynb).
 
+We can see that if the inputs `a` and `b` are valid on the rising edge of clock cycle `n`,
+the output will be valid before the rising edge of clock cycle `n+1`.  Hence, the **latency**
+is one clock cycle.  The diagram highlights the inputs, intermediate variables, and output
+for one of the inputs driven by the testbench.
+
 <img src="images/timing_simp_fun.png" alt="Timing diagram" width="800"/>
 

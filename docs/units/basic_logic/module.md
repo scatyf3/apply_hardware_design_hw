@@ -49,23 +49,25 @@ The outpus is `c_out`.  They have a programmable bitwidth.
     end
 ~~~
 
-* The output is computed with a simple function like multiplication
-and registered as well:
+* The output is computed with a simple function like multiplication.
+The output is not registered.  Instead it is the ouptut of a
+**combinational path** so that it is available within the propagation delay 
+from registering the inputs.
 ~~~systemverilog
     // Registered output
-    always_ff @(posedge clk) begin
-        if (rst)
-            c_out <= '0;
-        else
-            c_out <= a_reg * b_reg;
+    always_comb begin
+       c_out = a_reg * b_reg;
     end
 ~~~
+
 
 ## A Simple Testbench
 
 The testbench is in `tb_simp_fun.sv` and is also a SV file.
 It loops through a set of values for `a` and `b` and feeds them to the module.
 In each case, the module output is read and displayed.
+
+
 
 ---
 

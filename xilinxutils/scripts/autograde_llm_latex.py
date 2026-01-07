@@ -1,6 +1,5 @@
 from agents import Agent, Runner
 import asyncio
-import nest_asyncio
 import os
 from agents import function_tool
 import textwrap

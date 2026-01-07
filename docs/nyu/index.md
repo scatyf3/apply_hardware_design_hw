@@ -2,7 +2,7 @@
 title: NYU class
 parent: Hardware Design
 nav_order: 3
-has_children: false
+has_children: true
 ---
 
 ## ECE-GY 9463:  Special Topics in Computer Devices & Systems

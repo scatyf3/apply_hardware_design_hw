@@ -14,7 +14,7 @@ For all units, I will add lecture notes and problems.
 * [Unit 1:  Basic digital Logic](./basic_logic)
     * [SystemVerilog Examples:  Simple scalar functions](https://github.com/sdrangan/hwdesign/tree/main/demos/basic_logic)
     * Lecture:  [[PDF]](https://github.com/sdrangan/hwdesign/tree/main/units/unit01_basic_logic/basic_logic.pdf) [[pptx]](https://github.com/sdrangan/hwdesign/tree/main/units/unit01_basic_logic/basic_logic.pptx) 
-    * Problems [to be added]
+    * Problems:  [[PDF]](https://github.com/sdrangan/hwdesign/tree/main/units/unit01_basic_logic/prob/basic_logic_prob.pdf) [[tex]](https://github.com/sdrangan/hwdesign/tree/main/units/unit01_basic_logic/prob/basic_logic_prob.tex) 
 * [Unit 2:  Bus basics and memory-mapped interfaces](./procif)
     * [Vitis HLS Example:  Simple AXI4-Lite interface](https://github.com/sdrangan/hwdesign/tree/main/demos/scalar_fun)
     * Lecture [to be added]

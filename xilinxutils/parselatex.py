@@ -155,7 +155,7 @@ def load_schema(path: str) -> list[dict]:
             df[col] = df[col].map(lambda x: x.strip() if isinstance(x, str) else x)
 
     # Normalize booleans
-    df['submit_reqd'] = df['submit_reqd'].str.lower().isin(['1', 'true', 'yes'])
+    df['grade'] = df['grade'].str.lower().isin(['1', 'true', 'yes'])
 
     # Normalize points
     df['points'] = df['points'].astype(int)
@@ -175,7 +175,7 @@ def check_soln_core(schema, parsed_items, output_path):
         if i < len(schema):
             row = schema[i]
             qname = row["question_name"]
-            reqd = row["submit_reqd"]
+            reqd = row["grade"]
             pts = row["points"]
         else:
             qname = f"Extra item {i+1}"

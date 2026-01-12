@@ -1,3 +1,11 @@
+---
+title: Windows Installation Instructions
+parent: Installing Vitis and Vivado
+nav_order: 1
+has_children: false
+---
+
+
 ## Install Vitis and Vivado on Windows
 
 After registering the AMD account, you can download the unified installer for windows:

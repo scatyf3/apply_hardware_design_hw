@@ -2,7 +2,7 @@
 title: Installing Vitis and Vivado
 parent: Vitis and Vivado
 nav_order: 1
-has_children: false
+has_children: True
 ---
 
 # Installing Vivado and Vitis 

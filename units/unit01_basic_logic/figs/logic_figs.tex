@@ -23,6 +23,27 @@ Basic Digital Logic:  Figures and Code Snippets}
 \date{}
 
 \maketitle
+
+\subsection{Data types}
+
+Synthesizable data types:
+
+\begin{systemverilogcode}
+  logic x;   // Single 4-state bit
+  logic [15:0] y;   // 16-bit unsigned integer
+  logic signed [31:0] s; // 32-bit signed integer
+\end{systemverilogcode}
+
+These data types are synthesizable, meaning they can be directly mapped to hardware.
+Non-synthesizable data types, such as `int` and `shortint`, cannot be directly mapped to hardware and are typically used for simulation purposes only.
+
+\begin{systemverilogcode}
+  int a; // 32-bit signed integer
+  shortint b; // 16-bit signed integer
+  unisigned int c; // 32-bit unsigned integer
+  unsigned shortint d; // 16-bit unsigned integer
+
+\end{systemverilogcode}
 \subsection{Combinational Example: ReLU with a linear input}
 
 We consider implementing the ReLU function:
@@ -36,13 +57,13 @@ We consider implementing the ReLU function:
 
 \begin{systemverilogcode}
     module relu_lin (
-      input logic int x,
-      input logic int a,
-      input logic int b,
-      output logic int y
+      input logic signed [31:0] x,
+      input logic signed [31:0] a,
+      input logic signed [31:0] b,
+      output logic signed [31:0] y
     );
       always_comb begin
-        logic int mult_out, add_out;
+        logic signed [31:0] mult_out, add_out;
         mult_out = x * a;
         add_out = mult_out + b;
         y = (add_out > 0) ? add_out : 0;
@@ -80,6 +101,37 @@ We consider implementing the ReLU function:
   \caption{Fully combinational block diagram for ReLU with a linear input.}
   \label{fig:relu_comb}
 \end{figure}
+
+\subsection{Counter}
+
+\begin{systemverilogcode}
+  module counter (
+    input logic clk,
+    input logic rst,
+    input logic start,
+    input logic [3:0] cnt_init,
+    output logic [3:0] cnt
+  );
+    logic [3:0] cnt_next;
+    always_comb begin
+      cnt_next = cnt;
+      if ((start) && (cnt == 0)) begin
+        cnt_next = cnt_init;
+      end else if (cnt > 0) begin
+        cnt_next = cnt - 1;
+      end else begin
+        cnt_next = 0;
+      end
+    end
+    always_ff @(posedge clk) begin
+      if (rst) begin
+        cnt <= 0;
+      end else begin
+        cnt <= cnt_next;
+      end
+    end
+  endmodule
+\end{systemverilogcode}
 
 
 \subsection{Adder}
@@ -206,6 +258,7 @@ Draw a basic register.
   
 \end{figure}
 
+\pagebreak
 \subsection{Sequential ReLU with a linear input}
 
 The sequential implementation of the ReLU with a linear input is as follows:
@@ -214,16 +267,24 @@ The sequential implementation of the ReLU with a linear input is as follows:
 \begin{systemverilogcode}
     module relu_lin (
       input logic clk,
-      input logic rst_n,
-      input logic int x,
-      input logic int a,
-      input logic int b,
-      output logic int y
+      input logic rst,
+      input logic signed [31:0] x,
+      input logic signed [31:0] a,
+      input logic signed [31:0] b,
+      output logic signed [31:0] y
     );
-      int x_reg, a_reg, b_reg;
+      logic signed [31:0] x_reg, a_reg, b_reg;
 
-      always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
+      always_comb begin
+        logic signed [31:0] mult_out, add_out;
+        mult_out = x_reg * a_reg;
+        add_out = mult_out + b_reg;
+        y = (add_out > 0) ? add_out : 0;
+      end
+
+
+      always_ff @(posedge clk) begin
+        if (rst) begin
           x_reg <= 0;
           a_reg <= 0;
           b_reg <= 0;
@@ -233,12 +294,7 @@ The sequential implementation of the ReLU with a linear input is as follows:
           b_reg <= b;
         end
       end
-      always_comb begin
-        logic int mult_out, add_out;
-        mult_out = x_reg * a_reg;
-        add_out = mult_out + b_reg;
-        y = (add_out > 0) ? add_out : 0;
-      end
+      
     endmodule
   \end{systemverilogcode}
 
@@ -310,7 +366,7 @@ module quad_func #(
     xreg <= x;
   end
   always_comb begin
-    logic int xsq, xsq_w2, x_w1;
+    logic signed [31:0] xsq, xsq_w2, x_w1;
     xsq = xreg * xreg;
     xsq_w2 = w2 * xsq;
     x_w1 = w1 * xreg;

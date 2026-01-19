@@ -53,16 +53,12 @@ module tb_lin_relu;
         
         for (int i = 0; i < test_vectors.size(); i++) begin
 
-            #(0.1*CLK_PERIOD) // hold time before changing input
-            x_in = 'x;  // initial intedeterminate value
-            w_in = 'x;
-            b_in = 'x;
-            #(0.15*CLK_PERIOD);  // Small delay for propagation time (before clock edge)
+            // Apply inputs
             x_in = test_vectors[i].x;
             w_in = test_vectors[i].w;
             b_in = test_vectors[i].b;
 
-            // Clock cylce
+            // Clock cycle
             @(posedge clk);
 
             // Compute expected value for verification (optional)
@@ -75,14 +71,10 @@ module tb_lin_relu;
                      i, x, y_out, y_exp);
         end
 
-        // Display y_out for the remaining pipeline stages
-        for (int j = 0; j < 2; j++) begin
-            @(posedge clk);
-            $display("Pipeline flush %0d: y_out=%0d", j, y_out);
-        end
 
         repeat (1) @(posedge clk);
         $finish;
     end
+
 
 endmodule

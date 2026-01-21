@@ -1,7 +1,7 @@
 ---
 title: System Verilog Implementation
 parent: Conditional Subtraction Division
-nav_order: 2
+nav_order: 3
 has_children: false
 ---
 
@@ -60,10 +60,10 @@ The testbench can be run by using the `xilinxutils` function:
 sv_sim --source subc_divide.sv --tb tb_subc_divide.sv
 ```
 
-This will run the three steps in synthesizing and simulating the SV mdule.
+This will run the three steps in synthesizing and simulating the SV mdule.  The outputs will be stored in a CSV file, `test_outputs/tv_sv.csv`.
 
-You should see if all tests pass, and you can keep modifying the SV code until all test passed.
+You should see how many tests passed, and you can keep modifying the SV code until all test passed.
 
 ---
 
-Go to 
+Go to [submission](./submit.md)

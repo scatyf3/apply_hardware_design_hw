@@ -32,14 +32,15 @@ module tb_lin_relu;
         logic signed [WIDTH-1:0] b;
     } test_vector_t;
 
-    initial begin
-        // Define test vectors
-        test_vector_t test_vectors[] = '{
-            '{x: 10,  w: 3,  b: 15},
-            '{x: -4, w: 10,  b: 4},
-            '{x: 8, w: 12,  b: -5}
-        };
+    // Define test vectors
+    test_vector_t test_vectors[] = '{
+        '{x: 10,  w: 3,  b: 15},
+        '{x: -4, w: 10,  b: 4},
+        '{x: 8, w: 12,  b: -5}
+    };
 
+    initial begin
+    
         // Local temporaries for expected value computation
         logic signed [WIDTH-1:0] x;
         logic signed [WIDTH-1:0] w;

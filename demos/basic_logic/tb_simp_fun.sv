@@ -29,16 +29,17 @@ module tb_simp_fun;
         logic [WIDTH-1:0] b;
     } test_vector_t;
 
-    initial begin
-        // Define test vectors
-        test_vector_t test_vectors[] = '{
-            '{a: 5, b: 7},
-            '{a: 10, b: 20},
-            '{a: 100, b: 50},
-            '{a: 0, b: 0},
-            '{a: 255, b: 255}
-        };
+    // Define test vectors
+    test_vector_t test_vectors[] = '{
+        '{a: 5, b: 7},
+        '{a: 10, b: 20},
+        '{a: 100, b: 50},
+        '{a: 0, b: 0},
+        '{a: 255, b: 255}
+    };
 
+    initial begin
+        
         // Reset for a few cycles
         repeat (3) @(posedge clk);
         rst = 0;

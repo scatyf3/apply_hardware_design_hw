@@ -2,6 +2,10 @@
 import os
 import pandas as pd
 import numpy as np
+import json
+import zipfile
+import os
+import shutil
 
 """
 Test 1:  Read the python test vector file 
@@ -77,7 +81,7 @@ def test_hardware():
     score = (np.mean(zpass) + np.mean(cycle_pass)) / 2
     return score, feedback
 
-results = []
+tests = []
 npoints_python = 10
 npoints_hw = 20
 
@@ -98,29 +102,48 @@ score, feedback = test_python()
 score = int( np.round(score * npoints_python) ) 
 print(f"Score: {score}/{npoints_python}")
 print(f"Feedback: {feedback}")
-r = {'test': 'Python Implementation', 'score': score, 'feedback': feedback}
-results.append(r)
+r = {'name': 'Python Implementation', 'score': score, 'max_score': npoints_python, 'output': feedback}
+tests.append(r)
 
 print('Test 2:  Hardware Implementation')
 score, feedback = test_hardware()
 score = int( np.round(score * npoints_hw) ) 
 print(f"Score: {score}/{npoints_hw}")
 print(f"Feedback: {feedback}")
-r = {'test': 'Hardware Implementation', 'score': score, 'feedback': feedback}
-results.append(r)
+r = {'name': 'Hardware Implementation', 'score': score, 'max_score': npoints_hw, 'output': feedback}
+tests.append(r)
+
+# Compute total score
+total_score = sum(test['score'] for test in tests)
+
+# Build results in new format
+results = {
+    'tests': tests,
+    'score': total_score
+}
+
 
 # Write results to a JSON file
-import json
-with open('results.json', 'w') as f:
+with open('submitted_results.json', 'w') as f:
     json.dump(results, f, indent=4)
 
-# Create a zip archive of results.json, tb_subc_divide.sv, and subc_divide.py
-import zipfile
-with zipfile.ZipFile('results.zip', 'w') as zipf:
-    zipf.write('results.json')
+# Create submission directory
+submission_dir = 'submission'
+if os.path.exists(submission_dir):
+    shutil.rmtree(submission_dir)
+os.makedirs(submission_dir)
+
+# Copy files to submission directory
+shutil.copy('submitted_results.json', os.path.join(submission_dir, 'submitted_results.json'))
+for f in zip_files:
+    shutil.copy(f, os.path.join(submission_dir, os.path.basename(f)))
+
+# Create submission.zip containing the results and required source files
+with zipfile.ZipFile('submission.zip', 'w') as zipf:
+    zipf.write('submitted_results.json', arcname='submitted_results.json')
     for f in zip_files:
         zipf.write(f, arcname=os.path.basename(f))
-print("Results and submission files have been zipped into results.zip")
-print("Upload results.zip to GradeScope.")
 
-
+print("Submission package created: submission.zip")
+print("Submission directory created: submission/")
+print("Upload submission.zip to Gradescope.")

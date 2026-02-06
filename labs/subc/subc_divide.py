@@ -1,3 +1,4 @@
+#         z = subc_divide(a, b, nbits)
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -32,9 +33,11 @@ def subc_divide(
     z: int: 
         The numerator of the rational approximation of the quotient.
     """
-    if b == 0:
-        raise ValueError("Division by zero is not allowed.")
-    if (a >= b) or (a < 0):
-        raise ValueError("We must have a < b and a >= 0.")
-    
-    # TODO: Implement the conditional subtraction division algorithm
+    z = 0
+    for i in range(nbits):
+        z <<= 1  # Shift left to make space for the next bit
+        a <<= 1  # Shift left to bring down the next bit of the dividend
+        if a >= b:
+            a -= b
+            z |= 1  # Set the least significant bit of z to 1
+    return z

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Basic Logic Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 5px;
+        }
+        .question {
+            margin-bottom: 40px;
+        }
+        pre code {
+            background-color: #f7f7f7;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 0.95em;
+            display: block;
+        }
+    </style>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["\\[", "\\]"]]
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Basic Logic Questions</h1>
+    <div class="question">
+        <h2>Question 1. Bit packing</h2>
+
+        <p>A designer wants a SystemVerilog 32-bit variable <code>instruction</code>
+        with three fields:
+        <ul>
+            <li><code>opcode</code>:  Bits [31:16], an operation code (opcode).</li>
+            <li><code>rega</code>: Bits [15:8], a first register address.</li>
+            <li><code>regb</code>: Bits [7:0], a second register address.</li>
+        </ul>
+        <ol type="a">
+            <li>What data type should <code>instruction</code> have?</li>
+
+            <li>Write SystemVerilog code to extract the fields
+            <code>opcode</code>, <code>rega</code>, and <code>regb</code>
+            from <code>instruction</code> into separate variables.
+            Make sure to declare the variable types.</li>
+        </ol>
+        
+    </div>
+    <div class="question">
+        <h2>Question 2. Two's complement</h2>
+
+        <p>Consider 8-bit two's-complement numbers. For each of the following decimal
+        values, write the corresponding 8-bit two's-complement <strong>binary</strong>
+        representation, meaning list the 8 bits for each number. 
+        Make sure to include leading zeros to show all 8 bits.
+        </p>
+
+        <ol type="a">
+            <li>+13</li>
+            <li>-13</li>
+            <li>+64</li>
+            <li>-64</li>
+            <li>-1</li>
+        </ol>
+        
+    </div>
+    <div class="question">
+        <h2>Question 3. Literals to binary</h2>
+
+            <p>
+                Convert each of the following SystemVerilog literals into their
+                8-bit binary values. For negative values, give the 8-bit two's-complement
+                representation.
+            </p>
+
+            <ol type="a">
+                <li>8'd13</li>
+                <li>8'hF2</li>
+                <li>-5</li>
+                <li>8'd-20</li>
+                <li>8'h7F</li>
+            </ol>
+        
+    </div>
+    <div class="question">
+        <h2>Question 4. Truncation</h2>
+
+            <p>
+                Truncate the following numbers to 4 bits in both unsigned and signed
+                representations. Provide the decimal value of the truncated numbers in each case.
+            </p>
+
+            <ol type="a">
+                <li>9</li>
+                <li>15</li>
+                <li>23</li>
+                <li>-1</li>
+                <li>-12</li>
+            </ol>
+        
+    </div>
+    <div class="question">
+        <h2>Question 5. Addition overflow</h2>
+
+            <p>Consider the addition:</p>
+
+            <pre><code>logic signed [3:0] a = A;
+logic signed [3:0] b = B;
+logic signed [W-1:0] c;
+c = a + b;
+</code></pre>
+
+            <p>
+                For each of the following values of <code>A</code>, <code>B</code>, and <code>W</code>,
+                determine the value of <code>c</code> in decimal.
+            </p>
+
+            <ol type="a">
+                <li><code>A = 5, B = 3, W = 4</code></li>
+                <li><code>A = 5, B = 4, W = 4</code></li>
+                <li><code>A = 9, B = -7, W = 5</code></li>
+            </ol>
+        
+    </div>
+    <div class="question">
+        <h2>Question 6. Addition with multiple numbers</h2>
+
+            <p>Consider the addition:</p>
+
+            <pre><code>logic signed [7:0] a, b, c, d;
+logic signed [W-1:0] sum = a + b + c + d;
+</code></pre>
+
+            <p>
+                What value of <code>W</code> is required to ensure that no overflow
+                occurs in the sum?
+            </p>
+        
+    </div>
+    <div class="question">
+        <h2>Question 7. Multiplication overflow</h2>
+
+            <p>Consider the multiplication:</p>
+
+            <pre><code>logic signed [3:0] a = A;
+logic signed [3:0] b = B;
+logic signed [W-1:0] c;
+c = a * b;
+</code></pre>
+
+            <p>
+                For each of the following values of <code>A</code>, <code>B</code>, and <code>W</code>,
+                determine the value of <code>c</code> in decimal.
+            </p>
+
+            <ol type="a">
+                <li><code>A = 3, B = 4, W = 6</code></li>
+                <li><code>A = 7, B = 7, W = 5</code></li>
+                <li><code>A = -9, B = 5, W = 6</code></li>
+            </ol>
+        
+    </div>
+    <div class="question">
+        <h2>Question 8. Arithmetic shifts</h2>
+
+            <p>
+                Suppose <code>x</code> is the SystemVerilog variable:
+            </p>
+
+            <pre><code>logic signed [7:0] x;
+</code></pre>
+
+            <p>
+                Use arithmetic shifts to implement each of the following operations.
+                For each case, choose an appropriate signed bit-width for <code>y</code>
+                so that no bits are lost during left shifts.
+            </p>
+
+            <ol type="a">
+                <li><code>y = 4 * x</code></li>
+                <li><code>y = x / 16</code></li>
+                <li><code>y = 32 * x</code></li>
+            </ol>
+        
+    </div>
+    <div class="question">
+        <h2>Question 9. Bit growth and arithmetic</h2>
+
+            <p>
+                Consider the function:
+            </p>
+
+            <pre><code>y = 354 + x * x / 8
+</code></pre>
+
+            <p>
+                where <code>x</code> is a signed 16-bit integer (<code>logic signed [15:0] x</code>).
+            </p>
+
+            <ol type="a">
+                <li>
+                    Determine the minimum signed bit-width required for <code>y</code> so that
+                    the result never overflows for any valid 16-bit signed input <code>x</code>.
+                </li>
+
+                <li>
+                    Write a SystemVerilog module that implements this function using purely
+                    combinational logic. Be sure to declare all intermediate signals with
+                    appropriate widths.
+                </li>
+            </ol>
+        
+    </div>
+    <div class="question">
+        <h2>Question 10. AI prompt design</h2>
+
+            <p>
+            You want a combinational hardware module that implements the function:
+            </p>
+
+            <pre><code>y = max{ a0*x + b0, a1*x + b1 }
+</code></pre>
+
+            <p>
+                Write an <strong>example prompt</strong> that you could give an AI agent so that it will
+                generate a <em>single, unambiguous</em> SystemVerilog module implementing this function.
+                Your prompt must specify enough details (such as bit-widths, signedness, precision,
+                and combinational behavior) so that only one functional outcome is possible.
+                There are many correct answers — the key is to be specific.
+            </p>
+        
+    </div>
+</body>
+</html>

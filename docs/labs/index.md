@@ -10,9 +10,12 @@ As part of the class, we are building a few labs in both SystemVerilog and Vitis
 Unfortunately, we only have one lab so far.  But, we will add more over the course of the
 semester.
 
-* [Lab 1: Division with conditional subtraction](./subc/)
+* [Unit 2: Division with conditional subtraction](./subc/)
    * Implement a simple integer mathematical algorithm in SystemVerilog
    with a FSM and a handshake protocol.
+* [Unit 3:  Fixed point implementation of a cubic function](./cubic/)
+   * Implement a simple function in fixed point in SystemVerilog
+   and validate against a python Golden model
 
 
 

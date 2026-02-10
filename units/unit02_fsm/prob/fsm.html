@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sequential Logic and FSMs Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 5px;
+        }
+        .question {
+            margin-bottom: 40px;
+        }
+        pre code {
+            background-color: #f7f7f7;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 0.95em;
+            display: block;
+        }
+    </style>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["\\[", "\\]"]]
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Sequential Logic and FSMs Questions</h1>
+    <div class="question">
+        <h2>Question 1. Sequential updates</h2>
+
+        <p>Consider the following SystemVerilog code:</p>
+
+        <pre><code>always_ff @(posedge clk) begin
+    x <= x + v;
+    if (x > 30) begin
+        v <= -10;
+    end else if (x < 0) begin
+        v <= 10;
+    end
+end
+</code></pre>
+
+        <p>
+        Starting from \( (x,v) = (15,10)\), what are the values of 
+        \( (x,v) \) for the next 5 clock cycles?
+        </p>
+        
+    </div>
+    <div class="question">
+        <h2>Question 2. Linear system</h2>
+
+        <p>Consider the following SystemVerilog code:</p>
+
+        <pre><code>always_ff @(posedge clk) begin
+    x1 <= ((5*x1 + 3*x2)>>3);
+    x2 <= ((4*x1 - 4*x2)>>3);
+end
+</code></pre>
+
+        <p>Here <code>&gt;&gt;3</code> denotes a right shift by 3 bits (division by 8), and all values are 32‑bit signed integers.</p>
+
+        <ol type="a">
+            <li>Suppose that \((x_1,x_2) = (8,0)\). What is the value of \((x_1,x_2)\) in the next clock cycle? Remember that assignments (<code>&lt;=</code>) are non‑blocking, so they update in parallel.</li>
+
+            <li>Write a Python function, say <code>sim_lin_sys</code>, that simulates this linear system with initial conditions <code>x1_0</code> and <code>x2_0</code> for <code>nit</code> clock cycles and outputs the values in an array <code>X</code> of shape <code>(nit+1, 2)</code>. The first row of <code>X</code> should be the initial conditions.</li>
+        </ol>
+        
+    </div>
+    <div class="question">
+        <h2>Question 3. ReLU function</h2>
+
+            <p><strong>ReLU function:</strong> We wish to implement the function</p>
+
+            <p style="text-align:center;">
+                \( y = a x^2 + \max\{ b x, 0 \} + c \)
+            </p>
+
+            <p>
+                for an input <code>x</code> and constants <code>a</code>, <code>b</code>, and <code>c</code>.
+                Write the SystemVerilog code to implement this function over two clock cycles.
+                Specifically, the input <code>x</code> should be registered in the first clock cycle,
+                and the output <code>y</code> should be produced in the second clock cycle.
+                Make sure that no clock cycle requires two or more multiplications that cannot be parallelized.
+                You do not need to include the module declaration, or declaration
+                of variables; just the
+                <code>always_ff</code> and <code>always_comb</code> blocks.
+            </p>
+        
+    </div>
+    <div class="question">
+        <h2>Question 4. ReLU+quadratic</h2>
+
+            <p>Consider the following SystemVerilog code:</p>
+
+            <pre><code>always_comb begin
+    act_in = w1*xreg + b1;
+    if (act_in > 0) begin
+        a = act_in;
+    end else begin
+        a = 0;
+    end
+    xsq = ((xreg*xreg) >> 2);
+    y = xsq + w2*a + b2;
+end
+
+always_ff @(posedge clk) begin
+    xreg <= x;
+end
+</code></pre>
+
+            <p>
+                Here, <code>&gt;&gt; 2</code> denotes a right shift by 2 bits (division by 4).
+                The code registers the input <code>x</code> into <code>xreg</code> on each clock cycle
+                and produces the output <code>y</code> in a single clock cycle based on the registered value.
+            </p>
+
+            <p>
+                Assume that <code>w1</code>, <code>b1</code>, <code>w2</code>, and <code>b2</code> are constants.
+                Rewrite the code so that it operates over <strong>two clock cycles</strong>.
+                Specifically, register the input <code>x</code> on the first clock cycle,
+                and compute the output <code>y</code> two clock cycles later.
+                This requires introducing additional registers to store intermediate values.
+                You do not need to include the module declaration, or declaration
+                of variables; just the <code>always_ff</code> and <code>always_comb</code> blocks.
+            </p>
+        
+    </div>
+    <div class="question">
+        <h2>Question 5. Bouncing ball</h2>
+
+            <p>
+                We simulate a ball moving in one-dimensional space between two walls at
+                positions <code>0</code> and <code>100</code>. The ball has a position
+                <code>x</code> and a velocity <code>v</code>. At each time step, the ball
+                first moves according to its velocity:
+            </p>
+
+            <p style="text-align:center;">
+                \( x \gets x + v \)
+            </p>
+
+            <p>
+                If this motion causes the ball to go past a wall, the ball “bounces” and
+                reverses direction. The bounce should behave the same way a real ball would:
+                the ball cannot pass through the wall, and the rebound distance should be
+                consistent with how far it would have travelled past the wall.
+            </p>
+
+            <p>For example:</p>
+
+            <ul>
+                <li>
+                    If \((x,v) = (40,10)\), then the ball moves to \(50\), which is inside
+                    the interval, so the next state is \((50,10)\).
+                </li>
+
+                <li>
+                    If \((x,v) = (96,10)\), then the ball would move to \(106\), which is
+                    past the right wall at \(100\). After bouncing, the ball ends up at
+                    position \(94\) with velocity \(-10\).
+                </li>
+
+                <li>
+                    If \((x,v) = (3,-10)\), then the ball would move to \(-7\), which is
+                    past the left wall at \(0\). After bouncing, the ball ends up at
+                    position \(7\) with velocity \(10\).
+                </li>
+            </ul>
+
+            <p>
+                Write the SystemVerilog code for the updates for <code>x</code> and <code>v</code>.
+                You do not need to include the module declaration, just the
+                <code>always_ff</code> and <code>always_comb</code> blocks.
+            </p>
+        
+    </div>
+    <div class="question">
+        <h2>Question 6. Exponent</h2>
+
+             <p>
+                Suppose we wish to implement the function
+            </p>
+
+            <p style="text-align:center;">
+                \( y = x^i \)
+            </p>
+
+            <p>
+                where the exponent \(i\) is an integer in the set \(\{0,1,2,3\}\).
+                The input <code>x</code> and output <code>y</code> are signed 32-bit integers
+                (you do not need to worry about overflow).
+            </p>
+
+            <p>
+                Write SystemVerilog code that computes <code>y</code>.
+                The output should always be produced exactly <strong>two cycles</strong> after the input,
+                even when \(i = 0\), \(1\), \(2\), or \(3\).
+                If two multiplications are in the same clock cycle, they must be parallelizable. 
+                You do not need to include the module declaration, or declaration
+                of variables; just the <code>always_ff</code> and <code>always_comb</code> blocks.
+            </p>
+
+            <p>
+                <strong>Hint:</strong> You will need to use delay lines to store the input
+                <code>x</code> and exponent <code>i</code>. This problem requires pipelining,
+                which we will discuss in more detail in later units.
+            </p>
+        
+    </div>
+    <div class="question">
+        <h2>Question 7. Testbench code</h2>
+
+            <p>
+                A SystemVerilog testbench instantiates an instance <code>dut</code>,
+                of the module <code>my_func</code>, to compute a function
+                \( y = f(x) \):
+            </p>
+
+            <pre><code>// Testbench signals
+logic signed [31:0] x;
+logic signed [31:0] y;
+logic clk;
+
+// Instantiate the device under test (dut)
+my_func dut (
+    .clk(clk),
+    .rst(rst),
+    .x(x),
+    .y(y)
+);
+
+// Test vectors
+logic signed [31:0] xtest [0:3] = '{10, 20, -5, 7};
+</code></pre>
+
+            <p>Write an <code>initial</code> block that:</p>
+
+            <ul>
+                <li>On cycle 0, sets <code>rst = 1</code>, then de‑asserts it on the next cycle.</li>
+                <li>Starting on cycle 4, sets <code>x = xtest[0]</code> and prints the output <code>y</code> on cycle 8.</li>
+                <li>On cycle 9, sets <code>x = xtest[1]</code> and prints <code>y</code> on cycle 13.</li>
+                <li>On cycle 14, sets <code>x = xtest[2]</code> and prints <code>y</code> on cycle 18.</li>
+                <li>Continue similarly for the remaining test inputs.</li>
+            </ul>
+
+            <p>To display a number, you may use:</p>
+
+            <pre><code>$display("x = %0d", x);
+</code></pre>
+        
+    </div>
+    <div class="question">
+        <h2>Question 8. AI prompt design - sequential counter</h2>
+
+        <p>
+        You want to create a counter module in SystemVerilog that counts from 0 to a specified maximum value.
+        Provide a prompt to an AI that clearly describes the requirements for this counter module.
+        Your prompt should be written as if you are instructing the AI to generate the SystemVerilog code.
+        </p>
+
+        <p>
+        Your prompt must specify the module’s inputs, outputs, and cycle-by-cycle behavior with minimal ambiguity.
+        In particular, you should clearly describe:
+        </p>
+
+        <ul>
+            <li>The clock and reset inputs, including whether reset is synchronous or asynchronous and its polarity.</li>
+            <li>How the counter is started (e.g., a <code>start</code> signal), including how that signal is sampled and interpreted (pulse vs. level, what happens if it stays high, etc.).</li>
+            <li>How the final (maximum) count value is specified (e.g., parameter vs. input port) and what happens when the counter reaches that value (stop, hold, wrap, done pulse, etc.).</li>
+            <li>The relevant bit widths for the counter, maximum value, and any status signals.</li>
+            <li>The exact behavior on reset (what values are cleared, what happens if reset occurs mid-count, and when outputs become valid again).</li>
+            <li>The timing of outputs relative to the clock (e.g., registered outputs, when <code>done</code> asserts and deasserts).</li>
+        </ul>
+
+        <p>
+        There is no single correct solution. However, your prompt should be sufficiently detailed that the exact
+        cycle-by-cycle behavior of the counter is clear to the AI and to a human reading your specification.
+        </p>
+    
+    </div>
+</body>
+</html>

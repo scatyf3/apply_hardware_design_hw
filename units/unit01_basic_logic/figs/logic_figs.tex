@@ -26,13 +26,111 @@ Basic Digital Logic:  Figures and Code Snippets}
 
 \subsection{Data types}
 
-Synthesizable data types:
+Logic and logic vectors:
+
 
 \begin{systemverilogcode}
-  logic x;   // Single 4-state bit
+  logic x;          // Single 4-state bit
+  logic [15:0] y;   // 16-bit vector
+\end{systemverilogcode}
+
+
+\begin{systemverilogcode}
+  logic x[15:0];     // 16-bit vector
+  x[3]  // bit 3 of x (fourth bit)
+  x[7:0] // bits 0 through 7 of x (lower byte)
+  x[15:8] // bits 8 through 15 of x (upper byte)
+\end{systemverilogcode}
+
+Addition
+
+\begin{systemverilogcode}
+  logic signed [15:0] a, b; // 16-bit integers
+  logic signed [15:0] c1;  // 16-bits
+  logic signed [16:0] c2;  // 17-bits
+
+  // May overflow
+  c1 = a + b;
+
+  // Still may overflow!
+  // a+b computed in 16-bits, then assigned to c2
+  c2 = a + b;
+
+  // No overflow
+  c2 = a;
+  c2 = c2 + b;
+\end{systemverilogcode}
+
+Better method
+\begin{systemverilogcode}
+  logic signed [15:0] a, b; // 16-bit integers
+  logic signed [16:0] aext = a; // extend a to 17-bits
+  logic signed [16:0] bext = b; // extend b to 17-bits
+  logic signed [16:0] c = aext + bext; // 17-bit result
+\end{systemverilogcode}
+
+
+Integers:
+
+\begin{systemverilogcode}
   logic [15:0] y;   // 16-bit unsigned integer
   logic signed [31:0] s; // 32-bit signed integer
 \end{systemverilogcode}
+
+Logical shift:
+\begin{systemverilogcode}
+  logic [15:0] x;   // 16-bit unsigned integer
+  logic [19:0] y1, y2;   // 20-bit unsigned integer
+
+  // Shift happens in 16-bits
+  // Upper bits are discared before assignment
+  y1 = x << 4; 
+
+  // Widens first, then shifts
+  // No bits are discarded
+  y2 = x;
+  y2 = y2 << 4;
+
+  // Equaivalent widening
+  y2 = {x, 4'b000};
+\end{systemverilogcode}
+
+
+Arithmetic shift:
+
+\begin{systemverilogcode}
+
+  // 8-bit signed integer 
+  // Two's complement = (-21)_{10} = (11101011)_2
+  logic signed [7:0] x = -8'21;  
+
+  // Logical shift
+  logic signed [7:0] y1;
+  y1 = x >>> 2; // y1 = (00111010)_2 = 58_{10}
+
+  // Arithmetic shift
+  logic signed [7:0] y2;
+  y2 = x >>> 2; // y2 = (11111010)_2 = -6_{10}
+\end{systemverilogcode}
+
+Operations:
+
+\begin{systemverilogcode}
+  x << b    // Logical shift left by b bits
+  x <<< b   // Arithmetic shift left by b bits
+  x >> b    // Logical shift right by b bits
+  x >>> b   // Arithmetic shift right by b bits
+\end{systemverilogcode}
+
+
+\begin{pythoncode}
+  x << b    # Left shift
+  x >> b    # Arithmetic shift right by b bits
+  (x >> b) & ((1<<W)-1)   # Logical  shift right by b bits
+\end{pythoncode}
+
+  
+
 
 These data types are synthesizable, meaning they can be directly mapped to hardware.
 Non-synthesizable data types, such as `int` and `shortint`, cannot be directly mapped to hardware and are typically used for simulation purposes only.

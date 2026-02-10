@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Fixed and Floating Point Numbers Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 5px;
+        }
+        .question {
+            margin-bottom: 40px;
+        }
+        pre code {
+            background-color: #f7f7f7;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 0.95em;
+            display: block;
+        }
+    </style>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["\\[", "\\]"]]
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Fixed and Floating Point Numbers Questions</h1>
+    <div class="question">
+        <h2>Question 1. Custom FP decoding</h2>
+
+        <p>
+        Consider a simple floating‑point representation \( x = A \, (-1)^s \, c \, 2^e \),
+        where the scale factor is \(A = 2^{-3}\).
+        The fields are:
+        <ul>
+            <li>sign bit \(s\)</li>
+            <li>3‑bit unsigned exponent \(e\)</li>
+            <li>5‑bit mantissa \(c\), interpreted as an <em>unsigned integer</em> (no implicit leading 1)</li>
+        </ul>
+        </p>
+
+        <p>
+            The bits are packed with the sign bit first, followed by the exponent bits,
+            then the mantissa bits.  
+            What decimal values are represented by the following bit patterns?
+        </p>
+
+        <ol type="a">
+            <li><code>0 000 10000</code></li>
+            <li><code>1 011 11000</code></li>
+            <li><code>0 101 00101</code></li>
+        </ol>
+        
+    </div>
+    <div class="question">
+        <h2>Question 2. Custom FP encoding</h2>
+
+            <p>
+                Consider a custom floating-point format
+                \[
+                    \hat{x} = (-1)^s \left(1 + \frac{c}{2^p}\right) 2^{e - 4},
+                \]
+                where:
+            </p>
+            <ul>
+                <li>\(s\) is a 1-bit sign (\(s \in \{0,1\}\)),</li>
+                <li>\(c\) is a \(p = 5\)-bit unsigned mantissa field (\(c \in \{0,\dots,31\}\)),</li>
+                <li>\(e\) is a 3-bit unsigned exponent field (\(e \in \{0,\dots,7\}\)).</li>
+            </ul>
+
+            <p>
+                For each real number \(x\) below, choose \(s\), \(c\), and \(e\) so that
+                \(\hat{x}\) is as close as possible to \(x\). Give your final answers as
+                \((s, c, e)\) and the corresponding \(\hat{x}\) in decimal.
+            </p>
+
+            <ol type="a">
+                <li>\(x = 3.0\)</li>
+                <li>\(x = 0.5\)</li>
+                <li>\(x = -5.0\)</li>
+                <li>\(x = 1.3\)</li>
+            </ol>
+        
+    </div>
+    <div class="question">
+        <h2>Question 3. FixP linear approximation</h2>
+
+            <p>
+                You wish to approximate the floating‑point equation
+                \[
+                    y = a x + b
+                \]
+                using Qm.n fixed‑point arithmetic.
+            </p>
+
+            <p>
+                Let \(a = 0.3125\), \(b = -1.75\), and choose the format Q3.4
+                (3 integer bits including sign, 4 fractional bits).
+            </p>
+            <ol type="a">
+                <li>Convert \(a\) and \(b\) into their Q3.4 integer representations.</li>
+                <li>Write SystemVerilog code that computes an approximation of \(y\) using only Q3.4 arithmetic.</li>
+            </ol>
+        
+    </div>
+    <div class="question">
+        <h2>Question 4. FixedP mult with saturation</h2>
+
+            <p>
+                Write SystemVerilog code to implement the computation
+                \[
+                    y = a \cdot b
+                \]
+                where all variables (<code>a</code>, <code>b</code>, and <code>y</code>) are represented in Q5.4 format.
+                Instead of truncating the result of the multiplication, perform saturation as follows:
+                <ul>
+                    <li>Declare the variables with the appropriate bit widths.</li>
+                    <li>Compute the product of <code>a</code> and <code>b</code> in an intermediate variable with full precision.</li>
+                    <li>Then you can shift and saturate or saturate and shift to get back to Q5.4 format for the final variable <code>y</code>.</li>
+                </ul>
+            </p>
+            
+        
+    </div>
+</body>
+</html>
